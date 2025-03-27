@@ -1,10 +1,10 @@
-package manakin.ru.stalcraftmonitor.CriteriaRepoForTask;
+package manakin.ru.stalcraftmonitor.criteriaRepoForTask;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.*;
-import manakin.ru.stalcraftmonitor.Entities.Favorite;
-import manakin.ru.stalcraftmonitor.Entities.Item;
-import manakin.ru.stalcraftmonitor.Entities.User;
+import manakin.ru.stalcraftmonitor.entity.Favorite;
+import manakin.ru.stalcraftmonitor.entity.Item;
+import manakin.ru.stalcraftmonitor.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

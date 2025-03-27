@@ -1,7 +1,7 @@
-package manakin.ru.stalcraftmonitor.CriteriaRepoForTask;
+package manakin.ru.stalcraftmonitor.criteriaRepoForTask;
 
-import manakin.ru.stalcraftmonitor.Entities.Item;
-import manakin.ru.stalcraftmonitor.Entities.User;
+import manakin.ru.stalcraftmonitor.entity.Item;
+import manakin.ru.stalcraftmonitor.entity.User;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package manakin.ru.stalcraftmonitor.Entities;
+package manakin.ru.stalcraftmonitor.entity;
 
 import jakarta.persistence.*;
 
