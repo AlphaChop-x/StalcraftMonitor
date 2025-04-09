@@ -2,10 +2,12 @@ package manakin.ru.stalcraftmonitor.repository;
 
 import manakin.ru.stalcraftmonitor.entity.Item;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@RepositoryRestResource
 @Repository
 public interface ItemRepository extends CrudRepository<Item, String> {
     List<Item> findByCategory(String category);
@@ -13,7 +15,14 @@ public interface ItemRepository extends CrudRepository<Item, String> {
     /**
      * Удаляети предмет по его имени
      *
-     * @param name имя предмета
+     * @param id айди предмета
      */
-    void deleteItemByName(String name);
+    void deleteItemById(String id);
+
+    /**
+     * Возвращает предмет по его ID
+     *
+     * @param itemId айди предмета
+     */
+    Item getItemById(String itemId);
 }

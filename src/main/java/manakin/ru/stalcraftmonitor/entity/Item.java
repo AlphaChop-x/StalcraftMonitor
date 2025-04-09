@@ -9,7 +9,7 @@ import java.util.List;
 public class Item {
 
     @Id
-    @Column(name = "id", nullable = false, length = 255)
+    @Column(nullable = false, length = 8)
     private String id;
 
     @Column(nullable = false)
@@ -21,8 +21,8 @@ public class Item {
     @Column(nullable = false)
     private String description;
 
-    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
-    private List<Favorite> favorites;
+    @ManyToMany(mappedBy = "favoriteItems")
+    private List<User> app_user;
 
     public String getId() {
         return id;
