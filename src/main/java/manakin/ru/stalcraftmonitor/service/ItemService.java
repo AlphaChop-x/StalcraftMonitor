@@ -7,7 +7,7 @@ public interface ItemService {
      * Создаёт предмет
      *
      * @param item - предмет
-     * @return
+     *
      */
 
     Item createItem(Item item);

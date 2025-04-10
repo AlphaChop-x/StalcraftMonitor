@@ -6,6 +6,7 @@ import manakin.ru.stalcraftmonitor.repository.ItemRepository;
 import manakin.ru.stalcraftmonitor.repository.PriceHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
@@ -28,6 +29,13 @@ public class ItemServiceImpl implements ItemService {
         this.priceHistoryRepository = priceHistoryRepository;
     }
 
+    /**
+     * Транзакция для создания предмета в базе данных
+     * На вход принимает item
+     * item{id,name,category,description}
+     *
+     * @param item - предмет
+     */
     @Override
     public Item createItem(Item item) {
         TransactionStatus transaction = transactionManager.getTransaction(new DefaultTransactionDefinition());
@@ -41,6 +49,13 @@ public class ItemServiceImpl implements ItemService {
         return item;
     }
 
+    /**
+     * Транзакция для удаления предмета из базы данных
+     * На вход принимает Id предмета
+     * id - String(4)
+     *
+     * @param itemId - id предмета
+     */
     @Override
     public void deleteItem(String itemId) {
         TransactionStatus transaction = transactionManager.getTransaction(new DefaultTransactionDefinition());
@@ -62,8 +77,19 @@ public class ItemServiceImpl implements ItemService {
         }
     }
 
+    /**
+     * Метод для получения предмета по его id
+     * itemId - String(4)
+     *
+     * @param itemId - id предмета
+     */
     @Override
     public Item getItem(String itemId) {
-        return itemRepository.getItemById(itemId);
+        if (!itemRepository.existsById(itemId)) {
+            throw new ResourceNotFoundException("Предмет с заданным id не найден");
+        } else {
+            return itemRepository.getItemById(itemId);
+        }
+
     }
 }

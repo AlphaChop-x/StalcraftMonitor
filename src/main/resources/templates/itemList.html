@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Item List</title>
+</head>
+<body>
+<h1>Item List</h1>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Category</th>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
+    <tr th:each="item : ${items}">
+        <td th:text="${item.getId()}"></td>
+        <td th:text="${item.getCategory()}"></td>
+        <td th:text="${item.getName()}"></td>
+        <td th:text="${item.getDescription()}"></td>
+    </tr>
+</table>
+</body>
+</html>
