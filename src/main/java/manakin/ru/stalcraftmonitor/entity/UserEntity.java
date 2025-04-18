@@ -1,19 +1,13 @@
 package manakin.ru.stalcraftmonitor.entity;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
 import java.util.UUID;
 
-enum Role {
-    ADMIN,
-    USER
-}
-
 @Entity
 @Table(name = "app_user")
-public class User {
+public class UserEntity {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -79,5 +73,9 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Role> getRoles() {
+        return List.of(Role.values());
     }
 }

@@ -1,8 +1,7 @@
-package manakin.ru.stalcraftmonitor.restController;
+package manakin.ru.stalcraftmonitor.controller.rest;
 
 import manakin.ru.stalcraftmonitor.entity.Item;
 import manakin.ru.stalcraftmonitor.repository.ItemRepository;
-import manakin.ru.stalcraftmonitor.service.ItemService;
 import manakin.ru.stalcraftmonitor.service.ItemServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

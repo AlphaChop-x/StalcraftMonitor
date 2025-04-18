@@ -22,7 +22,7 @@ public class Item {
     private String description;
 
     @ManyToMany(mappedBy = "favoriteItems")
-    private List<User> app_user;
+    private List<UserEntity> app_user;
 
     public String getId() {
         return id;
