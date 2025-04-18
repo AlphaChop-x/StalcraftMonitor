@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleafe.org"
+      lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Register new user</title>
+    <link rel="stylesheet" href="/default-ui.css"/>
 </head>
 <body>
-
+<div class="content">
+    <div th:if="${message}">
+        <div th:text="${message}"></div>
+    </div>
+    <form class="login-form" th:action="@{/register}" method="post">
+        <h2>Register new user</h2>
+        <p><label> Username: <br/><input type="text" name="username"/></label></p>
+        <p><label> Email: <br/><input type="text" name="email"/></label></p>
+        <p><label> Password: <br/><input type="password" name="password"/></label></p>
+        <p>
+            <button type="submit" class="primary">Register</button>
+        </p>
+    </form>
+</div>
 </body>
 </html>

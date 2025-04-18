@@ -13,7 +13,7 @@ public interface ItemRepository extends CrudRepository<Item, String> {
     List<Item> findByCategory(String category);
 
     /**
-     * Удаляети предмет по его имени
+     * Удаляет предмет по его имени
      *
      * @param id айди предмета
      */
