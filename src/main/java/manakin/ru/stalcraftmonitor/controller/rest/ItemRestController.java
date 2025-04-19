@@ -1,7 +1,6 @@
 package manakin.ru.stalcraftmonitor.controller.rest;
 
 import manakin.ru.stalcraftmonitor.entity.Item;
-import manakin.ru.stalcraftmonitor.repository.ItemRepository;
 import manakin.ru.stalcraftmonitor.service.ItemServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,29 +11,52 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/monitor/items")
 public class ItemRestController {
 
-    @Autowired
-    private ItemRepository itemRepository;
+
+    private final ItemServiceImpl itemService;
 
     @Autowired
-    private ItemServiceImpl itemService;
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Item> getItemById(@PathVariable String id) {
-        return itemRepository.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ItemRestController(ItemServiceImpl itemService) {
+        this.itemService = itemService;
     }
 
-    @PostMapping
-    public ResponseEntity<Item> createItem(@RequestBody Item item) {
-        Item createdItem = itemService.createItem(item);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdItem);
+    @GetMapping("/{id}")
+    public ResponseEntity<Item> getItemById(
+            @PathVariable String id
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.FOUND)
+                .body(itemService.getItem(id));
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<String> deleteItem(@PathVariable String id) {
+    public ResponseEntity<String> deleteItem(
+            @PathVariable String id
+    ) {
         itemService.deleteItem(id);
-        return ResponseEntity.ok("OK");
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("Item deleted");
+    }
+
+    @PostMapping()
+    public ResponseEntity<String> addItem(
+            @ModelAttribute("itemId") String itemId,
+            @ModelAttribute("category") String category,
+            @ModelAttribute("itemName") String itemName,
+            @ModelAttribute("itemDescription") String itemDescription
+    ) {
+        Item item = new Item();
+
+        item.setCategory(category);
+        item.setName(itemName);
+        item.setDescription(itemDescription);
+        item.setId(itemId);
+
+        itemService.createItem(item);
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body("Item created successfully");
     }
 }

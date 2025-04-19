@@ -23,9 +23,12 @@ public class SpringSecurityConfig {
         return security
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/register").permitAll()
-                        .requestMatchers("/admin").hasRole("ADMIN")
+                        .requestMatchers("/admin").hasRole(Role.ADMIN.name())
+                        .requestMatchers("/swagger-ui/index.html").hasRole(Role.ADMIN.name())
                         .anyRequest().authenticated())
-                .formLogin(Customizer.withDefaults())
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .permitAll())
                 .build();
     }
 }

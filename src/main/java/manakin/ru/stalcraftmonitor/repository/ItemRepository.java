@@ -1,6 +1,7 @@
 package manakin.ru.stalcraftmonitor.repository;
 
 import manakin.ru.stalcraftmonitor.entity.Item;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
@@ -25,4 +26,7 @@ public interface ItemRepository extends CrudRepository<Item, String> {
      * @param itemId айди предмета
      */
     Item getItemById(String itemId);
+
+    @Query("SELECT i FROM Item i")
+    List<Item> findAllItems();
 }

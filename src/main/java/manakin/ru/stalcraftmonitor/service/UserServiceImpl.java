@@ -39,12 +39,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return new User(entity.getEmail(), entity.getPassword(), extractRoles(entity));
     }
 
-    private Collection<? extends GrantedAuthority> extractRoles(UserEntity entity) {
-        return entity.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.name()))
-                .collect(Collectors.toSet());
-    }
-
     @Override
     public UserEntity registerUser(String username, String email, String password) {
         UserEntity existingEntity = userRepository.findByEmailIgnoreCase(email);
@@ -73,5 +67,15 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public void deleteUser(UserEntity user) {
 
+    }
+
+    public UserEntity findUserByEmail(String email) {
+        return userRepository.findByEmailIgnoreCase(email);
+    }
+
+    private Collection<? extends GrantedAuthority> extractRoles(UserEntity entity) {
+        return entity.getRoles().stream()
+                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.name()))
+                .collect(Collectors.toSet());
     }
 }

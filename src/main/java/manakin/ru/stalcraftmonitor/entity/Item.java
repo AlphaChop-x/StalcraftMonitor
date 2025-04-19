@@ -24,6 +24,17 @@ public class Item {
     @ManyToMany(mappedBy = "favoriteItems")
     private List<UserEntity> app_user;
 
+    public Item(String id, String name, String category, String description) {
+        this.id = id;
+        this.name = name;
+        this.category = category;
+        this.description = description;
+    }
+
+    public Item() {
+
+    }
+
     public String getId() {
         return id;
     }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleafe.org"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="/default-ui.css"/>
 </head>
 <body>
+<div th:if="${passwordsNotEquals != null}">
+    Passwords not equals, please retype them!
+</div>
 <div class="content">
     <div th:if="${message}">
         <div th:text="${message}"></div>
@@ -16,6 +19,7 @@
         <p><label> Username: <br/><input type="text" name="username"/></label></p>
         <p><label> Email: <br/><input type="text" name="email"/></label></p>
         <p><label> Password: <br/><input type="password" name="password"/></label></p>
+        <p><label> RetypePassword: <br/><input type="text" name="retypedPassword"></label></p>
         <p>
             <button type="submit" class="primary">Register</button>
         </p>

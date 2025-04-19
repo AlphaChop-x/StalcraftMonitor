@@ -76,6 +76,6 @@ public class UserEntity {
     }
 
     public List<Role> getRoles() {
-        return List.of(Role.values());
+        return List.of(this.role);
     }
 }

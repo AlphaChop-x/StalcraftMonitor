@@ -9,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionException;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
@@ -31,21 +32,17 @@ public class ItemServiceImpl implements ItemService {
 
     /**
      * Транзакция для создания предмета в базе данных
-     * На вход принимает item
-     * item{id,name,category,description}
+     * На вход принимает item{id, name, category, description}
      *
      * @param item - предмет
      */
     @Override
     public Item createItem(Item item) {
-        TransactionStatus transaction = transactionManager.getTransaction(new DefaultTransactionDefinition());
-        try {
-            itemRepository.save(item);
-            transactionManager.commit(transaction);
-        } catch (DataAccessException e) {
-            transactionManager.rollback(transaction);
-            throw e;
-        }
+
+        if (itemRepository.existsById(item.getId())) {
+            throw new ResourceNotFoundException("Item already exists!");
+        } else itemRepository.save(item);
+
         return item;
     }
 
@@ -70,7 +67,7 @@ public class ItemServiceImpl implements ItemService {
             itemRepository.deleteItemById(itemId);
             //Завершаем транзакцию
             transactionManager.commit(transaction);
-        } catch (DataAccessException e) {
+        } catch (TransactionException e) {
             //Откатываем транзакцию
             transactionManager.rollback(transaction);
             throw e;
@@ -91,5 +88,9 @@ public class ItemServiceImpl implements ItemService {
             return itemRepository.getItemById(itemId);
         }
 
+    }
+
+    public List<Item> getAllItems() {
+        return itemRepository.findAllItems();
     }
 }
