@@ -1,4 +1,4 @@
-package manakin.ru.stalcraftmonitor.controller.rest;
+package manakin.ru.stalcraftmonitor.controller;
 
 import manakin.ru.stalcraftmonitor.entity.Item;
 import manakin.ru.stalcraftmonitor.service.ItemServiceImpl;
@@ -37,26 +37,5 @@ public class ItemRestController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body("Item deleted");
-    }
-
-    @PostMapping()
-    public ResponseEntity<String> addItem(
-            @ModelAttribute("itemId") String itemId,
-            @ModelAttribute("category") String category,
-            @ModelAttribute("itemName") String itemName,
-            @ModelAttribute("itemDescription") String itemDescription
-    ) {
-        Item item = new Item();
-
-        item.setCategory(category);
-        item.setName(itemName);
-        item.setDescription(itemDescription);
-        item.setId(itemId);
-
-        itemService.createItem(item);
-
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body("Item created successfully");
     }
 }

@@ -69,12 +69,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     }
 
-    public UserEntity findUserByEmail(String email) {
-        return userRepository.findByEmailIgnoreCase(email);
-    }
-
     private Collection<? extends GrantedAuthority> extractRoles(UserEntity entity) {
-        return entity.getRoles().stream()
+        return entity.getRole().stream()
                 .map(role -> new SimpleGrantedAuthority("ROLE_" + role.name()))
                 .collect(Collectors.toSet());
     }

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -31,5 +33,28 @@ public class ItemController {
     @GetMapping("/showBlank")
     public String createBlankItem() {
         return "itemPost";
+    }
+
+    @PostMapping()
+    public String addItem(
+            @ModelAttribute("itemId") String itemId,
+            @ModelAttribute("category") String category,
+            @ModelAttribute("itemName") String itemName,
+            @ModelAttribute("itemDescription") String itemDescription,
+            Model model
+    ) {
+        Item item = new Item();
+
+        item.setCategory(category);
+        item.setName(itemName);
+        item.setDescription(itemDescription);
+        item.setId(itemId);
+
+        itemService.createItem(item);
+        List<Item> items = itemService.getAllItems();
+
+        model.addAttribute("items", items);
+
+        return "itemList";
     }
 }

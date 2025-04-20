@@ -29,6 +29,4 @@ public interface UserRepository extends CrudRepository<UserEntity, UUID> {
             "JOIN u.favoriteItems i " +
             "WHERE u.userId = :udserID")
     List<String> findFavoriteItemsByUserEmail(@Param("Email") String email);
-
-    String email(String email);
 }

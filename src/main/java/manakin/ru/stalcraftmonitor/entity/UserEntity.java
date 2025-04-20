@@ -1,10 +1,12 @@
 package manakin.ru.stalcraftmonitor.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.List;
 import java.util.UUID;
 
+@Data
 @Entity
 @Table(name = "app_user")
 public class UserEntity {
@@ -35,47 +37,8 @@ public class UserEntity {
     )
     private List<Item> favoriteItems;
 
-    public UUID getId() {
-        return userId;
-    }
-
-    public void setId(UUID id) {
-        this.userId = id;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public List<Role> getRoles() {
+    public List<Role> getRole() {
         return List.of(this.role);
     }
+
 }

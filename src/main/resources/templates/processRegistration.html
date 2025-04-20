@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register new user</title>
+</head>
+<body>
+<div th:if="${passwordsNotEquals != null}"
+     style="font-family: monospace; color: #ff111b; text-align: center; font-size: 20px">
+    Passwords not equals, please retype them!
+</div>
+<div class="content" style="text-align: center; padding-top: 200px">
+    <form method="POST" th:action="@{/register}" id="registration-form" th:object="${userDto}">
+
+        <h2>Register new user</h2>
+
+        <label for="userName">UserName: </label>
+        <br/><input type="text" name="userName" id="userName"
+               th:class="${#fields.hasErrors('userName')} ? 'input-error'"/>
+        <br/><span th:if="${#fields.hasErrors('userName')}" class="error"
+              th:errors="*{userName}" style="color: #ff111b">Username error</span>
+
+        <br/><label for="email">Email: </label>
+        <br/><input type="text" name="email" id="email"
+               th:class="${#fields.hasErrors('email')} ? 'input-error'"/>
+        <br/><span th:if="${#fields.hasErrors('email') }" class="error"
+              th:errors="*{email}" style="color: #ff111b">Email error</span>
+
+        <br/><label for="password">Password: </label>
+        <br/><input type="text" name="password" id="password"
+               th:class="${#fields.hasErrors('password')} ? 'input-error'"/>
+        <br/><span th:if="${#fields.hasErrors('password')}" class="error"
+              th:errors="*{password}" style="color: #ff111b">Password error</span>
+
+        <!--        <p><label for="userName"> Username: <br/><input type="text" name="username"/></label></p>-->
+        <!--        <p><label> Email: <br/><input type="text" name="email"/></label></p>-->
+        <!--        <p><label> Password: <br/><input type="password" name="password"/></label></p>-->
+        <br/><label> RetypePassword: <br/><input type="text" name="retypedPassword"></label>
+        <p>
+            <button type="submit" class="primary">Register</button>
+        </p>
+    </form>
+</div>
+</body>
+</html>

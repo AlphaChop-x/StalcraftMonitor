@@ -4,7 +4,11 @@
     <title>Item List</title>
 </head>
 <body>
-<h1>Item List</h1>
+<h1 style="text-align: center">Item List</h1>
+<form th:action="@{/monitor/items/showBlank}" method="get"
+      style="font-size: 16px; color: black; text-align: center; padding-bottom: 75px">
+    <input type="submit" value="Добавить предмет">
+</form>
 <table border="1">
     <tr>
         <th>ID</th>
