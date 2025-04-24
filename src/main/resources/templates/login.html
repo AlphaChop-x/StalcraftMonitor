@@ -1,27 +1,44 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
 <head>
-    <title>Please Log In</title>
+    <title style="font-size: 20px">Please Log In</title>
 </head>
-<body>
-<h1>Please Log In</h1>
-<div th:if="${param.error}">
-    Invalid username and password.
+
+<body style="text-align: center">
+
+<h1 style="padding-top: 200px">Please Log In</h1>
+
+<div th:if="${param.error}" style="margin-bottom: 16px; color: #ff111b">
+    Invalid username and password.<br/>
 </div>
-<div th:if="${param.logout}">
+
+<div th:if="${param.logout}" style="padding-bottom: 25px">
     You have been logged out.
 </div>
+
+<div th:if="${registered}" style="padding-bottom: 25px; color: green">
+    You have been register successfully!
+</div>
+
 <form th:action="@{/login}" method="post">
+
+    <label style="text-align: center">Email:</label>
     <div>
-        <input type="text" name="username" placeholder="email"/>
+        <input type="text" name="username" placeholder="email" style="margin-bottom: 16px"/>
     </div>
+
+    <label style="text-align: center">Password:</label>
     <div>
-        <input type="password" name="password" placeholder="Password"/>
+        <input type="password" name="password" placeholder="Password" style="margin-bottom: 16px"/>
     </div>
-    <input type="submit" value="Log in"/>
+    <input type="submit" value="Log in" style="margin-bottom: 16px; font-size: 16px; color: black"/>
+
 </form>
+
 <form th:action="@{/register}" method="get">
     <input type="submit" value="Register" style="font-size: 16px; color: black">
 </form>
 </body>
+
 </html>

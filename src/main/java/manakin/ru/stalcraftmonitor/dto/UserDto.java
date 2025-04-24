@@ -1,11 +1,9 @@
 package manakin.ru.stalcraftmonitor.dto;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 
+import java.util.UUID;
+
 @Builder
-public record UserDto(@NotBlank String userName,
-                      @NotBlank String email,
-                      @NotBlank String password
-) {
+public record UserDto(UUID id, String email, String username) {
 }

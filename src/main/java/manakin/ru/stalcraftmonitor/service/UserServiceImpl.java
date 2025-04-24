@@ -41,11 +41,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public UserEntity registerUser(String username, String email, String password) {
-        UserEntity existingEntity = userRepository.findByEmailIgnoreCase(email);
-        if (existingEntity != null) {
-            throw new RuntimeException("User already exists");
-        }
-
         UserEntity userEntity = new UserEntity();
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();

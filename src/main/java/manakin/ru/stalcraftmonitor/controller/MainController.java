@@ -1,10 +1,9 @@
 package manakin.ru.stalcraftmonitor.controller;
 
 import jakarta.servlet.http.HttpSession;
-import manakin.ru.stalcraftmonitor.dto.UserDto;
+import manakin.ru.stalcraftmonitor.dto.UserValidationDto;
 import manakin.ru.stalcraftmonitor.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -42,48 +41,49 @@ public class MainController {
 
     @PostMapping("/login")
     public String processLogin() {
+
         return "home";
     }
 
     @GetMapping("/logout")
-    public String logout(HttpSession session) {
+    public String logout(
+            HttpSession session
+    ) {
         session.invalidate();
         return "/login";
     }
 
     @GetMapping("/register")
-    public String showRegistrationForm(@Autowired Model model) {
-        model.addAttribute("userDto", new UserDto("", "", ""));
-        return "registration";
+    public String showRegistrationForm(
+            @Autowired Model model
+    ) {
+        model.addAttribute("userValidationDto", new UserValidationDto(null, null, null));
+        return "processRegistration";
     }
 
     @PostMapping("/register")
     public String processRegistration(
-            @Validated @ModelAttribute("userDto") UserDto userDto,
+            @Validated @ModelAttribute("userValidationDto") UserValidationDto userValidationDto,
             BindingResult bindingResult,
-//            @ModelAttribute("username") String username,
-//            @ModelAttribute("email") String email,
-//            @ModelAttribute("password") String password,
             @ModelAttribute("retypedPassword") String retypedPassword,
             Model model
     ) {
+
         if (bindingResult.hasErrors()) {
             return "processRegistration";
         }
 
-        if (!userDto.password().equals(retypedPassword)) {
+        if (!retypedPassword.equals(userValidationDto.password())) {
             model.addAttribute("passwordsNotEquals", true);
             return "processRegistration";
         }
 
         try {
-            userService.registerUser(userDto.userName(), userDto.email(), userDto.password());
-        } catch (DuplicateKeyException e) {
-            return e.getMessage();
+            userService.registerUser(userValidationDto.userName(), userValidationDto.email(), userValidationDto.password());
+            model.addAttribute("registered", true);
+            return "login";
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
         }
-
-        model.addAttribute(userDto);
-
-        return "processRegistration";
     }
 }
