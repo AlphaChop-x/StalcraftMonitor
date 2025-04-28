@@ -11,8 +11,11 @@
     <p style="font-size: 16px; color: black; text-align: center">
         <a href="/logout">Log out</a>
     </p>
-    <form th:action="@{/monitor/items}" method="get" style="font-size: 16px; color: black; text-align: center">
+    <form th:action="@{/monitor/items}" method="GET" style="font-size: 16px; color: black; text-align: center">
         <input type="submit" value="Item list">
+    </form>
+    <form th:action="@{/records}" method="GET" style="font-size: 16px; color: black; text-align: center">
+        <input type="submit" value="get record">
     </form>
 </div>
 </body>

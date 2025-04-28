@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Application record</title>
+</head>
+<body style="text-align: center">
+<h1 style="margin-top: 200px">Содержание отчёта о количестве пользователей/предметов в базе данных.</h1>
+<label th:if="${record.status.toString() == 'CREATED'}" style="color: orange; font-size: 16px">Отчёт формируется,
+    пожалуйста подождите!</label>
+<label th:if="${record.status.toString() == 'FAILED'}" style="color: red; font-size: 16px">При формировании отчёта
+    произошла ошибка!</label>
+<div th:object="${record}">
+    <label style="white-space: pre-line" th:text="${record.recordContent}">Данные отчёта</label>
+    <br>Статус отчёта:
+    <label th:text="${' ' + record.status}"
+           th:style="${record.status.toString() == 'COMPLETED' ? 'color:green' : 'color:black'}">
+    </label>
+</div>
+</body>
+</html>
