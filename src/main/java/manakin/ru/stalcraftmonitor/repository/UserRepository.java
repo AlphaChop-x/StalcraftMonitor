@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 @RepositoryRestResource
 @Repository
@@ -29,4 +30,7 @@ public interface UserRepository extends CrudRepository<UserEntity, UUID> {
             "JOIN u.favoriteItems i " +
             "WHERE u.userId = :udserID")
     List<String> findFavoriteItemsByUserEmail(@Param("Email") String email);
+
+    @Query("SELECT COUNT(u) FROM UserEntity u")
+    int countAll();
 }

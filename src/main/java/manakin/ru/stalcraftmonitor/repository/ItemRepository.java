@@ -29,4 +29,8 @@ public interface ItemRepository extends CrudRepository<Item, String> {
 
     @Query("SELECT i FROM Item i")
     List<Item> findAllItems();
+
+    @Query("SELECT i FROM Item i")
+    int countAll();
+
 }
