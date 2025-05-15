@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -25,10 +26,11 @@ public class SpringSecurityConfig {
                         .requestMatchers("/register").permitAll()
                         .requestMatchers("/admin").hasRole(Role.ADMIN.name())
                         .requestMatchers("/swagger-ui/index.html").hasRole(Role.ADMIN.name())
-                        .anyRequest().authenticated())
+                        .anyRequest().authenticated())//Для работы Unit тестов здесь требуется поставить .permitAll()
                 .formLogin(form -> form
                         .loginPage("/login")
                         .permitAll())
+                .csrf(AbstractHttpConfigurer::disable)
                 .build();
     }
 }

@@ -33,4 +33,12 @@ public class DefaultAdvice {
         ServiceException response = new ServiceException(e.getMessage());
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ServiceException> onIllegalArgumentException(IllegalArgumentException e) {
+        ServiceException response = new ServiceException(e.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
 }

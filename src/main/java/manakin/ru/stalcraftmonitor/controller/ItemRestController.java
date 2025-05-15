@@ -19,6 +19,15 @@ public class ItemRestController {
         this.itemService = itemService;
     }
 
+    @PostMapping()
+    public ResponseEntity<?> addItem(
+            @RequestBody Item item
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(itemService.createItem(item));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Item> getItemById(
             @PathVariable String id

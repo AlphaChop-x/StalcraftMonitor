@@ -7,7 +7,7 @@
 
 <body style="text-align: center">
 
-<h1 style="padding-top: 200px">Please Log In</h1>
+<h1 name="loginText" style="padding-top: 200px">Please Log In</h1>
 
 <div th:if="${param.error}" style="margin-bottom: 16px; color: #ff111b">
     Invalid username and password.<br/>
@@ -32,7 +32,7 @@
     <div>
         <input type="password" name="password" placeholder="Password" style="margin-bottom: 16px"/>
     </div>
-    <input type="submit" value="Log in" style="margin-bottom: 16px; font-size: 16px; color: black"/>
+    <input type="submit" name= "loginBtn" value="Log in" style="margin-bottom: 16px; font-size: 16px; color: black"/>
 
 </form>
 

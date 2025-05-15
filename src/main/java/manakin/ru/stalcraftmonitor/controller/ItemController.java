@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/monitor/items")
+@RequestMapping("/monitor/items/zaglushka")
 public class ItemController {
 
     private final ItemServiceImpl itemService;
